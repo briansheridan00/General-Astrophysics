@@ -1,4 +1,4 @@
-# Geeral Astrophysics Code
+# General Astrophysics Code
 
 This is a Python simulation of the general astrophysical phenomena. 
 
@@ -14,10 +14,10 @@ This is a Python simulation of the general astrophysical phenomena.
 
 
 ## Dependencies
-
-* numpy
-* matplotlib
-* scipy 
+* Python 
+    * numpy
+    * matplotlib
+    * scipy 
 
 
 ## How to Run
