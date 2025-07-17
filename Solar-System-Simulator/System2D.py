@@ -1,8 +1,10 @@
+# Import relevant packages for the code. 
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import List, Dict, Tuple
 
 
+# Define a class for a solar system body. 
 class Body:
     """Represents a celestial body."""
 
@@ -37,7 +39,7 @@ class Body:
         self.velocity += acceleration * dt
 
 
-
+# Define a class for the solar system including integration of motion. 
 class SolarSystem:
     """Represents a system of celestial bodies."""
 
@@ -162,19 +164,18 @@ class SolarSystem:
         return [body.trajectory for body in self.bodies]
 
 
-
+# Create a funciton to run the simulaiton and plot the result. 
 def run_simulation(bodies: List[Body], years : float = 0.5):
     """
     Runs a small simulation of the solar system.
     """
 
     # Create the solar system
-    solar_system = SolarSystem(bodies=bodies)#, fictional_planet1, fictional_planet2])
+    solar_system = SolarSystem(bodies=bodies)
 
     # Simulation parameters
-    dt = 3600 * 24  # 1 day in seconds
-    #years = 0.52
-    time_steps = int(years * 365 * 24 * 3600 / dt)  # Number of steps 
+    dt = 3600 * 24  # 1 day in seconds 
+    time_steps = int(years * 365 * 24 * 3600 / dt) # Number of steps 
 
     # Run the simulation
     for _ in range(time_steps):
@@ -199,10 +200,10 @@ def run_simulation(bodies: List[Body], years : float = 0.5):
                                 'Jupiter': 'brown',
                                 'Saturn': 'yellow',
                                 'Uranus': 'cyan', 
-                                'Neptune': 'blue'}  # Consistent colors for real planets
+                                'Neptune': 'blue'}  # True colors of real planets 
     MIN_MASS = min(body.mass for body in solar_system.bodies)
     MAX_MASS = max(body.mass for body in solar_system.bodies)
-    MASS_SCALE_FACTOR = 1000  # Adjust for better visualization
+    MASS_SCALE_FACTOR = 1000  # Can adjust this to improve visualisation 
 
     # Plot the trajectories for each body
     for i, trajectory in enumerate(trajectories):
@@ -212,16 +213,16 @@ def run_simulation(bodies: List[Body], years : float = 0.5):
 
         # Determine color based on whether the body is fictional
         if body.is_fictional:
-            color = np.random.rand(3)  # Random color for fictional planets
+            color = np.random.rand(3)  # Random color for fictional planets (rgb) 
         else:
             color = SOLAR_SYSTEM_PLANET_COLORS.get(body.name, 'gray')  # Default to gray if not found
 
-        # Calculate the size of the scatter point, scaling with mass
-        size = (body.mass - MIN_MASS) / (MAX_MASS - MIN_MASS) * MASS_SCALE_FACTOR + 10  # Ensure size is at least 10
+        # Calculate scatter point size and scale with mass 
+        size = (body.mass - MIN_MASS) / (MAX_MASS - MIN_MASS) * MASS_SCALE_FACTOR + 10  # Size is at least 10
 
-        # Calculate alpha values for each point in the trajectory, more recent = more opaque
+        # Alpha values for each point in the trajectory, more recent = more opaque
         num_points = len(trajectory)
-        alpha_values = np.linspace(0.05, 0.7, num_points)  # Alpha from 0.1 to 1
+        alpha_values = np.linspace(0.05, 0.7, num_points) 
 
         #plt.plot(x_coords, y_coords, label=body.name, color=color, alpha=0.7) # added alpha to the line
         plt.scatter(x_coords, y_coords, c=[color] * num_points, s=[size] * num_points, alpha=alpha_values)  # Size varies, alpha varies
